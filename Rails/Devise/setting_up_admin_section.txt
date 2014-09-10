@@ -145,6 +145,46 @@ devise_scope :admin do
     get '/admins/sign_out' => 'admin/sessions#destroy'
 end
 
+7) Open app/controllers/application_controller.rb and add this:
 
-7) use rake routes or just type in a random url to see what paths are now avaiable to use
+  def require_admin   
+    session.delete(:return_to)
+    if current_admin == nil
+      session[:return_to] = request.fullpath
+      redirect_to new_admin_session_path
+    end
+  end 
+
+Then in controllers you want to secure with admin, say app/controllers/admin/home_controller.rb
+
+  before_action :require_admin
+
+also if you want to use a different layout add
+
+  layout "admin"
+
+8) Setting up the layout
+
+Create the layout in /views/layouts. Here is my head section
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Culture</title>
+  <%= stylesheet_link_tag    'admin/admin', media: 'all', 'data-turbolinks-track' => true %>  
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+
+
+The under /assests/stylesheets create the admin folder and admin.css.scss
+mine looks like this:
+
+ @import "bootstrap.min";
+ @import "font-awesome";
+ @import "sb-admin";
+ @import "admin_styles";
+
+9) use rake routes or just type in a random url to see what paths are now avaiable to use
 All done :)
