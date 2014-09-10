@@ -1,0 +1,54 @@
+
+
+git add '*.txt'
+# adds all new .txt files to staging
+
+git diff
+# shows the differences between between you and the last commit
+
+git diff HEAD
+# shows all of the differences between where you are and the head
+
+git push -u origin master
+# pushes to the repo on github and remembers the params for next time
+
+git pull origin master
+# grabs any updates on github master
+
+$ git reset octofamily/octodog.txt
+# removes files from staging
+
+git checkout -- octocat.txt
+# changes file back to repo version
+
+git branch clean_up 
+# creates a branch called clean_up
+
+git checkout clean_up
+#switches to the branch
+
+git rm '*.txt'
+#removes files from disk and staging
+
+git commit -m "my message here"
+#commits with a message
+
+git merge clean_up
+#merges branch to the current branch
+
+git branch -d clean_up
+#deletes a branch
+
+
+git log
+# shows recent commits
+
+
+git clean -df
+#remove all local uncommitted changes
+
+git checkout --
+# get a clean checkout of the current commit
+
+git commit -am 'a message here'
+# commit your changes with a message

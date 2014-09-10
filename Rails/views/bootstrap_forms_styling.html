@@ -1,0 +1,64 @@
+<form accept-charset="UTF-8" action="/posts" class="post-form" id="new_post" method="post">
+
+<fieldset>
+    <legend>New Post</legend>
+    <div class="row">
+        <div class="col-sm-6">    
+            <div class="form-group">
+                <label for="post_title_en">Title</label>                
+                <input class="form-control" id="post_title_en" name="post[title_en]" type="text">                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="post_price">Price</label>        
+                <input class="form-control" id="post_price" name="post[price]" type="text">        
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="post_phone">Phone</label>        
+                <input class="form-control" id="post_phone" name="post[phone]" type="text">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="post_city">City</label>        
+                <input class="form-control" id="post_city" name="post[city]" type="text">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="post_city_region">City region</label>        
+                <input class="form-control" id="post_city_region" name="post[city_region]" type="text">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="post_category_tags">Categories</label>        
+                <input class="form-control" id="post_category_tags" name="post[category_tags]" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="post_description_en">Description</label>
+      
+                <textarea class="text-area form-control" id="post_description_en" name="post[description_en]" rows="6"></textarea>                
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+    
+          <input class="btn btn-primary" name="commit" type="submit" value="Create Post">
+          <a class="btn btn-default" href="/posts"><span class="translation_missing" title="translation missing: en.helpers.links.cancel">Cancel</span></a>
+        </div>
+    </div>  
+</fieldset>
+
+</form>

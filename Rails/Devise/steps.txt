@@ -1,0 +1,150 @@
+1) Install Devise
+
+gem 'devise'
+rails generate devise:install
+
+2) Running the migration
+
+RUN: 
+rails generate devise Admin
+
+
+EDIT THE CLASS:
+
+class DeviseCreateAdmins < ActiveRecord::Migration
+
+  def migrate(direction)
+    super
+    # Create a default user
+    Admin.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if direction == :up
+  end
+
+  def self.up
+    create_table(:admins) do |t|
+      t.string :email,              :null => false, :default => ""
+      t.string :encrypted_password, :null => false, :default => ""
+
+      ## Recoverable
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
+
+      ## Rememberable
+      t.datetime :remember_created_at
+
+      ## Trackable
+      t.integer  :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
+
+      ## Confirmable
+      t.string   :confirmation_token
+      t.datetime :confirmed_at
+      t.datetime :confirmation_sent_at
+      t.string   :unconfirmed_email # Only if using reconfirmable
+      
+      # Lockable
+      t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts      
+      t.string   :unlock_token # Only if unlock strategy is :email or :both
+      t.datetime :locked_at
+
+      t.timestamps
+    end
+
+    add_index :admins, :email,                unique: true
+    add_index :admins, :reset_password_token, unique: true
+  end
+
+  def self.down
+    remove_index :admins, :email
+    remove_index :admins, :reset_password_token
+
+    drop_table :admins
+  end
+  
+end
+
+rake db:migrate
+
+3) Generate the views
+
+rails g devise:views
+
+4) Setting up the controllers and Views:
+Create: app/controllers/admin/sessions_controller.rb
+
+class Admin::SessionsController < Devise::SessionsController
+	include ApplicationHelper
+end
+
+Create: app/views/admin/seesions/new.html.erb
+
+<%= form_for(resource, as: resource_name, url: admin_session_path, html: {class: "form-horizontal form-user"}) do |f| %>
+		<h2>Sign in</h2>
+  		<div class="form-group">
+          <%= f.label :email, class: "control-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"} %>
+          </div>
+        </div>
+        
+
+        <div class="form-group">
+          <%= f.label :password, class: "control-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"} %>
+          </div>
+        </div>
+                                                                                                                                              
+        <% if devise_mapping.rememberable? -%>
+          <div class="form-group">
+            <%= f.label :remember_me, "Remember Me", class: "control-label col-md-4" %>
+            <div class="col-md-8">
+              <%= f.check_box :remember_me %>
+            </div>
+          </div>
+        <% end -%>
+                                                                                                                                              
+        <div class="form-group">
+          <div class="col-md-offset-4 col-md-8">
+            <%= f.submit "Login", class: "btn btn-primary" %>
+          </div>
+        </div>
+
+        <%= render "devise/shared/links" %>
+ 
+<% end %>
+
+5) Change app/views/devise/shared/_links.erb
+
+<%- if controller_name != 'sessions' %>
+  <%= link_to "Sign in", new_session_path(resource_name) %><br />
+<% end -%>
+
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Forgot your password?", new_admin_password_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
+  <% end -%>
+<% end -%>
+
+
+6) Configure the routes:
+
+devise_for :admins, controllers: { sessions: "admin/sessions" }
+devise_scope :admin do 
+    get '/admins/sign_out' => 'admin/sessions#destroy'
+end
+
+
+7) use rake routes or just type in a random url to see what paths are now avaiable to use
+All done :)

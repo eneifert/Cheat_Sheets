@@ -1,0 +1,57 @@
+<form accept-charset="UTF-8" action="/groups/for_sale/categories/antiques/search" class="new_search_posts" id="new_search_posts" method="get"><div style="display:none"><input name="utf8" type="hidden" value="✓"></div>
+
+
+    <div class="row">
+        <div class="col-sm-12">    
+            
+            <div class="fluid-form" style="width:195px">            
+                <div class="form-group" id="price-range">                
+                    <label>Price: </label>            
+                    <div>
+                        <input class="form-control" id="search_posts_min" name="search_posts[min]" placeholder="min" style="float:left; margin-right:10px;" type="text">
+                        <input class="form-control" id="search_posts_max" name="search_posts[max]" placeholder="max" type="text">                 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fluid-form">
+                <div class="form-group">
+                    <label>Sort By: </label>
+                    <div>   
+                        <select class="selectpicker show-tick" data-selected="date" data-width="150px" id="search_posts_sort" name="search_posts[sort]" style="display: none;"><option value="date">Date</option>
+                            <option value="cheapest">Cheapest</option>
+                            <option value="most_expensive">Most Expensive</option></select><div class="btn-group bootstrap-select show-tick" style="width: 150px;"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="search_posts_sort" title="Date"><span class="filter-option pull-left">Date</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">Date</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">Cheapest</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">Most Expensive</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="fluid-form">
+                <div class="form-group">
+                    <label class="spacing-label"><!-- for spacing only --></label>
+                    <div>
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search glyphicon-fix"></span>Search</button>     
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+
+</form>
+
+.fluid-form {
+    margin-top: 15px;
+    margin-right: 15px;
+    float: left;
+    display: inline-table;
+}
+
+.fluid-form .form-control {
+    width: 100%;
+}
+
+.fluid-form .spacing-label {
+    height: 15px;
+}
